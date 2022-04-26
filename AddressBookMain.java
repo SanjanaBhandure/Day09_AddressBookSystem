@@ -3,7 +3,7 @@
 * displays the Contacts in Address Book that can be modified in certain ways.
 *
 * @author: Sanjana Bhandure
-* @version: 1.2
+* @version: 1.3
 * @date: 26-04-2022
 */
 
@@ -27,7 +27,8 @@ public class AddressBookMain {
     public void console() {
         logger.info("-----------------");
         logger.info("1. Create contact");
-        logger.info("2. Exit");
+        logger.info("2. Edit Contact");
+        logger.info("3. Exit");
         logger.info("Enter your choice: ");
 
         int option = scanner.nextInt();
@@ -37,6 +38,10 @@ public class AddressBookMain {
                     break;
 
                 case 2:
+                    editContacts();
+                    break;
+
+                case 3:
                     logger.info("Exit...");
                     isRunning = false;
                     break;
@@ -72,7 +77,7 @@ public class AddressBookMain {
 
         logger.info("Enter State: ");
         String state = scanner.nextLine();
-        contacts.setCity(state);
+        contacts.setState(state);
 
         logger.info("Enter zip: ");
         String zip = scanner.nextLine();
@@ -90,6 +95,82 @@ public class AddressBookMain {
         logger.info("Contact Added Successfully");
         logger.info(person.toString());
     }
+
+    /*
+     * editContacts method created to update contacts with the given fields.
+     */
+    public void editContacts() {
+        logger.info("Enter the name to edit: ");
+        String first = scanner.next();
+
+        boolean isPerson = false;
+
+        //for loop used to get the size of array to edit the contact
+        for (int i = 0; i < person.size(); i++) {
+            if (person.get(i).getFirstName().equals(first)) {
+
+                isPerson = true;
+                logger.info("Enter your choice to edit: 1. First Name\n2. Last Name\n3. Address\n4.City\n5. State\n6. Zip\n7. PhoneNumber\n8. Email\n9. Exit ");
+                int choice = scanner.nextInt();
+                switch (choice) {
+                    case 1:
+                        logger.info("Enter First Name: ");
+                        String firstName = scanner.next();
+                        person.get(i).setFirstName(firstName);
+                        break;
+
+                    case 2:
+                        logger.info("Enter Last Name: ");
+                        String lastName = scanner.next();
+                        person.get(i).setLastName(lastName);
+                        break;
+
+                    case 3:
+                        logger.info("Enter Address: ");
+                        String address = scanner.next();
+                        person.get(i).setAddress(address);
+
+                    case 4:
+                        logger.info("Enter City: ");
+                        String city = scanner.next();
+                        person.get(i).setCity(city);
+                        break;
+
+                    case 5:
+                        logger.info("Enter State: ");
+                        String state = scanner.next();
+                        person.get(i).setState(state);
+                        break;
+
+                    case 6:
+                        logger.info("Enter Zip: ");
+                        String zip = scanner.next();
+                        person.get(i).setZip(zip);
+                        break;
+
+                    case 7:
+                        logger.info("Enter PhoneNumber: ");
+                        String phoneNumber = scanner.next();
+                        person.get(i).setPhoneNumber(phoneNumber);
+                        break;
+
+                    case 8:
+                        logger.info("Enter Email: ");
+                        String email = scanner.next();
+                        person.get(i).setEmail(email);
+                        break;
+
+                    default:
+                        logger.info("Select valid option: ");
+
+                } //end of switch
+                logger.info(person);
+            }
+            if (!isPerson)
+                logger.info("Contact not found!!!");
+        }
+    } // end of for loop
+
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
