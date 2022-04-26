@@ -3,7 +3,7 @@
 * displays the Contacts in Address Book that can be modified in certain ways.
 *
 * @author: Sanjana Bhandure
-* @version: 1.1
+* @version: 1.2
 * @date: 26-04-2022
 */
 
@@ -16,9 +16,36 @@ import java.util.Scanner;
 
 public class AddressBookMain {
     public static Logger logger = Logger.getLogger(AddressBookMain.class);
+    static boolean isRunning = true;
 
     //ArrayList object is created
     ArrayList<Contacts> person = new ArrayList<Contacts>();
+
+    //Taking input from the user
+    static Scanner scanner = new Scanner(System.in);
+
+    public void console() {
+        logger.info("-----------------");
+        logger.info("1. Create contact");
+        logger.info("2. Exit");
+        logger.info("Enter your choice: ");
+
+        int option = scanner.nextInt();
+            switch (option) {
+                case 1:
+                    createContacts();
+                    break;
+
+                case 2:
+                    logger.info("Exit...");
+                    isRunning = false;
+                    break;
+
+                default:
+                    logger.info("Enter valid option: ");
+                    break;
+        }
+    }
 
     /*
      * createContacts method created to create contacts with the given fields.
@@ -61,6 +88,7 @@ public class AddressBookMain {
 
         person.add(contacts);
         logger.info("Contact Added Successfully");
+        logger.info(person.toString());
     }
 
     public static void main(String[] args) {
@@ -69,10 +97,10 @@ public class AddressBookMain {
          * Displaying Welcome to Address Book Program in AddressBookMain class
          */
         logger.info("Welcome to Address Book Program!");
-
         //AddressBookMain object created
         AddressBookMain addressBookMain = new AddressBookMain();
-        //method calling
-        addressBookMain.createContacts();
+        while (isRunning) {
+            addressBookMain.console();
+        }
     }
 }
