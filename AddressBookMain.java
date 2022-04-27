@@ -3,7 +3,7 @@
 * displays the Contacts in Address Book that can be modified in certain ways.
 *
 * @author: Sanjana Bhandure
-* @version: 1.5
+* @version: 1.6
 * @date: 27-04-2022
 */
 
@@ -13,6 +13,8 @@ import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.Scanner;
 
 public class AddressBookMain {
@@ -21,6 +23,7 @@ public class AddressBookMain {
 
     //ArrayList object is created
     Collection<Contacts> person = new ArrayList<Contacts>();
+    Dictionary address = new Hashtable();
 
     //Taking input from the user
     static Scanner scanner = new Scanner(System.in);
@@ -35,7 +38,8 @@ public class AddressBookMain {
         logger.info("3. Delete Contact");
         logger.info("4. Print all contacts");
         logger.info("5. Add multiple person to Address Book");
-        logger.info("6. Exit");
+        logger.info("6. Create another address book");
+        logger.info("7. Exit");
         logger.info("Enter your choice: ");
 
         int option = scanner.nextInt();
@@ -61,6 +65,10 @@ public class AddressBookMain {
                     break;
 
                 case 6:
+                    addAddressBook();
+                    break;
+
+                case 7:
                     logger.info("Exit...");
                     isRunning = false;
                     break;
@@ -226,6 +234,17 @@ public class AddressBookMain {
         }
     }
 
+    /*
+     * addAddressBook method created to add new add multiple address book to the system.
+     */
+    public void addAddressBook() {
+        Scanner scanner = new Scanner(System.in);
+        logger.info("Enter name of address Book you want: ");
+        AddressBookMain addressBookMain = new AddressBookMain();
+        String bookName = scanner.nextLine();
+        address.put(bookName,addressBookMain);
+        logger.info("Address Book " +bookName+ " has been created.");
+    }
     /*
      * printAllContacts method created to print all contacts of AddressBook
      */
