@@ -35,7 +35,8 @@ public class AddressBookMain {
         logger.info("4. Print all contacts");
         logger.info("5. Exit");
         logger.info("Enter your choice: ");
-
+	  
+	  //cases created for users choice
         int option = scanner.nextInt();
             switch (option) {
                 case 1:
